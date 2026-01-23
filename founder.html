@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meet the Founder | Teengro</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="about-body" data-theme="dark">
+
+  <!-- =====================
+        NAVBAR (UNCHANGED)
+  ====================== -->
+  <header class="navbar">
+    <div class="logo"><b>Teengro</b></div>
+
+    <div class="nav-right">
+      <button
+        class="hamburger hamburger-about"
+        id="menuToggle"
+        aria-label="Menu"
+        type="button"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="menu-dropdown" id="menuDropdown">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="founder.html">Meet the Founder</a>
+      <button id="themeToggle">Change theme</button>
+    </div>
+  </header>
+
+  <!-- =====================
+        HERO
+  ====================== -->
+  <section class="hero">
+    <h1>Sushanth Kumar</h1>
+
+    <div class="typewriter">
+      <span id="founderText"></span><span class="cursor">|</span>
+    </div>
+
+    <p class="hero-subtext">
+      Founder of Teengro — built with optimism, discipline,
+      and a belief that students can do far more than they’re told.
+    </p>
+  </section>
+
+  <!-- =====================
+        CONTENT
+  ====================== -->
+  <section class="section">
+    <p>
+      I’m a student, but more importantly, I’m a builder.
+      I’ve always believed that waiting for the “right age”,
+      the “right time”, or permission from others only delays growth.
+    </p>
+
+    <p>
+      Teengro was born from optimism —
+      the belief that students are capable of clarity, depth,
+      and excellence when given the right tools and environment.
+    </p>
+
+    <p>
+      I don’t see limitations as permanent.
+      I see them as systems waiting to be redesigned.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Why I built Teengro</h2>
+    <p>
+      Too many students lose confidence not because they lack ability,
+      but because learning feels rushed, noisy, and impersonal.
+    </p>
+
+    <p>
+      I wanted to build something calm.
+      Something that explains instead of pressures.
+      Something that grows *with* the student.
+    </p>
+
+    <p>
+      Teengro is my answer to that problem —
+      a platform where understanding comes first,
+      and confidence follows naturally.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>What drives me</h2>
+    <ul>
+      <li>✔ Optimism rooted in effort, not motivation</li>
+      <li>✔ Belief that age should never cap ambition</li>
+      <li>✔ Discipline over shortcuts</li>
+      <li>✔ Learning that feels clear, not chaotic</li>
+      <li>✔ Building systems that help others grow</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>The long-term vision</h2>
+    <p>
+      Teengro isn’t meant to be just another study tool.
+      It’s being built as a long-term ecosystem
+      for student growth, focus, and self-belief.
+    </p>
+
+    <p>
+      My vision is simple but ambitious:
+      help students feel capable early,
+      think independently,
+      and build confidence before the world tells them to wait.
+    </p>
+
+    <p>
+      This is only the beginning.
+    </p>
+  </section>
+
+  <!-- =====================
+        FOOTER
+  ====================== -->
+  <footer class="about-footer">
+    © 2026 Teengro. Built by a student, for students.
+  </footer>
+
+  <!-- =====================
+        TYPEWRITER SCRIPT
+  ====================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const el = document.getElementById("founderText");
+      if (!el) return;
+
+      const words = [
+        "Student",
+        "Entrepreneur",
+        "Athlete",
+        "Optimist",
+        "Builder",
+        "Athlete"
+      ];
+
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function loop() {
+        const current = words[wordIndex];
+
+        if (!isDeleting) {
+          el.textContent = current.substring(0, charIndex + 1);
+          charIndex++;
+
+          if (charIndex === current.length) {
+            setTimeout(() => (isDeleting = true), 1200);
+          }
+        } else {
+          el.textContent = current.substring(0, charIndex - 1);
+          charIndex--;
+
+          if (charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+          }
+        }
+
+        setTimeout(loop, isDeleting ? 80 : 120);
+      }
+
+      loop();
+    });
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

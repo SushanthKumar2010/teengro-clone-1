@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Teengro</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="about-body">
+  <!-- Navbar -->
+  <header class="navbar">
+  <div class="logo"><b>Teengro</b></div>
+<span style="font-size: 0.85rem; font-weight: 500; margin-left: 8px;text-align:center; padding-right:17px;padding-left:17px;" >
+      <h2>AI tutor</h2>
+ <!--  <p>Ask questions from different subjects and get clear, step-by-step explanations.</p>  -->
+    </span>
+  <button class="hamburger" id="menuToggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="menu-dropdown" id="menuDropdown">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="founder.html">Meet the Founder</a>
+      <button id="themeToggle">Change theme</button>
+    </div>
+</header>
+
+
+  <main class="page-main">
+    <div class="ai-shell">
+      <section class="ai-controls">
+        <div class="ai-control">
+          <label for="classLevel">Class</label>
+          <select id="classLevel">
+            <option value="9" selected>9</option>
+            <option value="10" selected>10</option>
+          </select>
+        </div>
+
+
+        
+      <!-- Controls row -->
+        <div class="ai-control">
+          <label for="subject">Subject</label>
+          <select id="subject">
+            <option value="Maths">Maths</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="English Literature">English Literature</option>
+            <option value="English Grammar">English Grammar</option>
+            <option value="History">History</option>
+            <option value="Geography">Geography</option>
+            <option value="Computer Applications">Computer Applications</option>
+          </select>
+        </div>
+
+        <div class="ai-control">
+          <label for="chapter">Chapter</label>
+          <input  
+            id="chapter"
+            type="text"
+            placeholder="e.g. Quadratic Equations, Light, etc."
+          />
+        </div>
+      </section>
+      <!-- Header --><br><br><br><br><br>
+  
+      
+
+      <!-- Chat body -->
+      <section class="free-chat-shell">
+  <div id="chatWindow" class="free-chat-window">
+    <!-- messages injected here -->
+  </div>
+
+  <div class="free-input-wrapper">
+    <div class="free-input-bar">
+      <textarea
+        id="questionInput" 
+        placeholder="Ask anything..."
+      ></textarea>
+      <button id="sendBtn" onclick="sendQuestion()">
+        →
+      </button>
+    </div>
+  </div>
+</section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

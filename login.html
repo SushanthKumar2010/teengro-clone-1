@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Teengro</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="about-body">
+  <!-- Shared navbar -->
+  <header class="navbar">
+  <div class="logo"><b>Teengro</b></div>
+
+  <button class="hamburger" id="menuToggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="menu-dropdown" id="menuDropdown">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="founder.html">Meet the Founder</a>
+      <button id="themeToggle">Change theme</button>
+    </div>
+</header>
+
+
+  <!-- Centered login card -->
+  <main class="page-main">
+    <section class="login-card light-login-card">
+      <header class="login-header">
+        <h1>Welcome back</h1>
+        <p>Login to continue learning with your AI tutor.</p>
+      </header>
+
+      <div class="login-divider"></div>
+
+      <form class="login-form" onsubmit="login(event)">
+        <div class="login-field">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="login-field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <button type="submit" class="login-btn primary-btn">
+          Login
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
