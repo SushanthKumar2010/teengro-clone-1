@@ -831,15 +831,15 @@ body[data-theme="light"] .free-input-bar textarea {
 }
 
 .section p,
-.section li {
+.section li , .section ul{
   font-size: 17px;
   color: #000000;
   margin-bottom: 8px;
 }
-body[data-theme="light"] .section p, section li {
+body[data-theme="light"] .section p, section li, section ul {
   color: #000000;
 }
-body[data-theme="dark"] .section p, section li {
+body[data-theme="dark"] .section p, section li, section ul {
   color: #FFFFFF;
 }
 .founder-section {
@@ -912,5 +912,6 @@ body[data-theme="light"] strong {
     font-size: 0.9rem;
   }
 }
+
 
 
