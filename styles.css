@@ -776,19 +776,18 @@ body[data-theme="light"] .free-input-bar textarea {
 }
 
 .free-input-bar button:disabled {
-  background: #6b7280;
+  opacity: 1;
   cursor: not-allowed;
   box-shadow: none;
 }
 
 /* Loading spinner */
-
 .send-spinner {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid rgba(249, 250, 251, 0.4);
-  border-top-color: #f9fafb;
+  border: 2px solid rgba(2, 6, 23, 0.35);
+  border-top-color: #020617;
   animation: send-spin 0.6s linear infinite;
 }
 
@@ -797,6 +796,7 @@ body[data-theme="light"] .free-input-bar textarea {
     transform: rotate(360deg);
   }
 }
+
 
 /* === NEW ABOUT & FOUNDER STYLES === */
 
@@ -912,6 +912,7 @@ body[data-theme="light"] strong {
     font-size: 0.9rem;
   }
 }
+
 
 
 
