@@ -833,7 +833,7 @@ body[data-theme="light"] .free-input-bar textarea {
 .section p,
 .section li {
   font-size: 17px;
-  color: #d1d5db;
+  color: #000000;
   margin-bottom: 8px;
 }
 
@@ -907,3 +907,4 @@ body[data-theme="light"] strong {
     font-size: 0.9rem;
   }
 }
+
