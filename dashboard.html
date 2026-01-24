@@ -6,6 +6,22 @@
   <title>Dashboard | Teengro</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+  /* Lock navbar on this page only */
+  .navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  /* Prevent content from going under navbar */
+  .page-main {
+    padding-top: 70px; /* adjust if navbar height differs */
+  }
+</style>
+
 </head>
 <body class="about-body" data-theme="dark">
   <!-- Navbar -->
@@ -100,5 +116,6 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
