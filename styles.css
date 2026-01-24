@@ -29,7 +29,7 @@ body {
   --text-main-light: #111827;
 }
 
-/* Base */
+/* ===================== BASE ===================== */
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -83,7 +83,18 @@ body[data-theme="light"] .free-input-bar {
   border-color: #d1d5db;
 }
 
-/* Navbar per theme */
+/* ===================== NAVBAR & HAMBURGER ===================== */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid #1f2933;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
 
 body[data-theme="dark"] .navbar {
   background: #05080b;
@@ -95,6 +106,11 @@ body[data-theme="light"] .navbar {
   border-bottom-color: #e5e7eb;
 }
 
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+}
+
 body[data-theme="dark"] .logo {
   color: #f9fafb;
 }
@@ -102,42 +118,24 @@ body[data-theme="light"] .logo {
   color: #111827;
 }
 
-body[data-theme="dark"] .nav-links a {
-  color: #d1d5db;
-}
-body[data-theme="light"] .nav-links a {
-  color: #4b5563;
-}
+/* Small title next to logo */
 
-/* Section text per theme */
-
-body[data-theme="dark"] .section p,
-body[data-theme="dark"] .section li {
-  color: #cbd5f5;
-}
-
-body[data-theme="light"] .section p,
-body[data-theme="light"] .section li {
-  color: #374151;
-}
-
-/* ===================== NAVBAR & HAMBURGER ===================== */
-
-.navbar {
+.nav-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-left: 8px;
+  text-align: left;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 40px;
-  border-bottom: 1px solid #1f2933;
-  position: sticky;
-  top: 0;
-  z-index: 200;
+  flex-direction: column;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: 700;
+.nav-title h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
 }
+
+/* Right side of navbar */
 
 .nav-right {
   display: flex;
@@ -157,11 +155,18 @@ body[data-theme="light"] .section li {
   font-size: 0.95rem;
 }
 
+body[data-theme="dark"] .nav-links a {
+  color: #d1d5db;
+}
+body[data-theme="light"] .nav-links a {
+  color: #4b5563;
+}
+
 .nav-links a:hover {
   color: #60a5fa;
 }
 
-/* Unified hamburger */
+/* Hamburger */
 
 .hamburger {
   width: 28px;
@@ -191,8 +196,8 @@ body[data-theme="light"] .hamburger span {
 
 .menu-dropdown {
   position: absolute;
-  top: 60px;
-  right: 40px;
+  top: 56px;
+  right: 20px;
   min-width: 180px;
   background: #111827;
   border-radius: 12px;
@@ -241,7 +246,7 @@ body[data-theme="light"] .menu-dropdown button:hover {
   display: flex;
 }
 
-/* ===================== ABOUT PAGE ===================== */
+/* ===================== ABOUT PAGE (SHARED STYLES) ===================== */
 
 .hero {
   min-height: 70vh;
@@ -317,16 +322,15 @@ body[data-theme="light"] .menu-dropdown button:hover {
 
 .about-footer {
   text-align: center;
-  padding: 20px;
-  border-top: 1px solid #1f2933;
+  padding: 16px;
   font-size: 14px;
+  border-top: 1px solid #1f2933;
 }
 
 /* ===================== LOGIN LAYOUT & CARD ===================== */
 
-/* Shared page wrapper; login page centers card */
 .page-main {
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 56px);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -556,7 +560,7 @@ body[data-theme="light"] .login-field input::placeholder {
   margin-bottom: 4px;
 }
 
-/* ===================== AI HEADER & CONTROLS (DASHBOARD) ===================== */
+/* ===================== AI CONTROLS ===================== */
 
 .ai-shell {
   max-width: 960px;
@@ -564,74 +568,21 @@ body[data-theme="light"] .login-field input::placeholder {
   margin: 0 auto;
 }
 
-.ai-header {
-  max-width: 900px;
-  margin: 0 auto 18px;
-  text-align: center;
-  position: fixed;
-  justify-content: center;
-  align-items: center;
-}
+/* Controls row under navbar (desktop/tablet) */
 
-body[data-theme="dark"] .ai-header {
-  color: #e5e7eb;
-}
-
-body[data-theme="light"] .ai-headerl {
-  color: #374151;
-}
-
-.ai-header h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-body[data-theme="dark"] .ai-control h1 {
-  color: #e5e7eb;
-}
-
-body[data-theme="light"] .ai-control h1 {
-  color: #374151;
-}
-
-.ai-header p {
-  margin-top: 4px;
-  font-size: 0.9rem;
-  color: #9ca3af;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-body[data-theme="dark"] .ai-control p {
-  color: #e5e7eb;
-}
-
-body[data-theme="light"] .ai-control p {
-  color: #374151;
-}
-/* Controls row fixed under navbar */
-
-/* Controls row fixed under navbar */
 .ai-controls {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 64px;           /* under navbar */
+  position: sticky;
+  top: 56px;              /* under navbar */
   z-index: 150;
   max-width: 900px;
-  justify-content: center;/* gap below navbar */
-  margin: 1px auto 0;
+  margin: 8px auto 0;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   padding: 10px 12px;
   border-radius: 14px;
   border: 1px solid #1f2933;
-  /* no background here, theme sets it below */
+  min-height: 64px;       /* reserve vertical space so chat starts below */
 }
 
 /* Container background per theme */
@@ -643,15 +594,6 @@ body[data-theme="light"] .ai-controls {
   background: #e5e7eb;
 }
 
-.span{
-color: #e5e7eb;
-}
-body[data-theme="light"] .span {
-  background: #e5e7eb;
-}
-body[data-theme="light"] .span {
-  background: #374151;
-}
 /* Base controls */
 
 .ai-control {
@@ -726,7 +668,6 @@ body[data-theme="light"] .ai-control input:focus {
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
 }
 
-
 /* ===================== FREE STYLE CHAT LAYOUT ===================== */
 
 .free-chat-shell {
@@ -737,18 +678,20 @@ body[data-theme="light"] .ai-control input:focus {
   align-items: center;
 }
 
-/* Scrollable chat area */
+/* Scrollable chat area: top padding clears navbar + controls */
 
 .free-chat-window {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 120px 12px 120px; /* top for controls, bottom for input bar */
+  padding: 88px 12px 120px;  /* 88px = space for navbar + sticky controls */
   display: flex;
   flex-direction: column;
   gap: 12px;
   overflow-y: auto;
 }
+
+/* Scrollbar */
 
 .free-chat-window::-webkit-scrollbar {
   width: 6px;
@@ -765,7 +708,7 @@ body[data-theme="light"] .ai-control input:focus {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 32px;
+  bottom: 16px;
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -866,110 +809,6 @@ body[data-theme="light"] .free-input-bar textarea {
   }
 }
 
-/* ===================== RESPONSIVE ===================== */
-
-@media (max-width: 768px) {
-  .navbar {
-    padding: 12px 16px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .page-main {
-    padding: 24px 10px 40px;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-  }
-
-  .section {
-    padding: 40px 18px;
-  }
-
-  .light-login-card {
-    padding: 24px 18px;
-  }
-
-  .free-chat-window {
-    padding: 120px 10px 120px;
-  }
-
-  .free-input-wrapper {
-    bottom: 20px;
-  }
-
-  .free-input-bar {
-    margin: 0 10px;
-  }
-
-  .ai-controls {
-    top: 56px;
-    padding: 8px 10px;
-    gap: 8px;
-  }
-
-  .ai-control {
-    min-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    padding: 12px 16px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .page-main {
-    padding: 24px 10px 40px;
-  }
-
-  .hero h1 {
-    font-size: 32px;
-  }
-
-  .section {
-    padding: 32px 16px;
-  }
-
-  .light-login-card {
-    padding: 24px 18px;
-  }
-
-  /* Controls row: a bit closer to navbar, full-width columns */
-  .ai-controls {
-    top: 56px;             /* slightly tighter under navbar */
-    padding: 8px 10px;
-    gap: 6px;
-  }
-
-  .ai-control {
-    min-width: 100%;       /* stack Class / Subject / Chapter vertically */
-  }
-
-  /* Chat area: enough room for fixed controls + input bar */
-  .free-chat-window {
-    padding: 130px 10px 120px;
-  }
-
-  .free-input-wrapper {
-    bottom: 18px;
-  }
-
-  .free-input-bar {
-    margin: 0 10px;
-  }
-
-  .free-input-bar textarea {
-    font-size: 0.9rem;
-  }
-}
-
 /* === NEW ABOUT & FOUNDER STYLES === */
 
 .hero-subtitle {
@@ -994,7 +833,7 @@ body[data-theme="light"] .free-input-bar textarea {
 
 .hero-cta:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(37,99,235,0.5);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.5);
 }
 
 .section h2 {
@@ -1002,7 +841,8 @@ body[data-theme="light"] .free-input-bar textarea {
   margin-bottom: 14px;
 }
 
-.section p, .section li {
+.section p,
+.section li {
   font-size: 17px;
   color: #d1d5db;
   margin-bottom: 8px;
@@ -1013,13 +853,6 @@ body[data-theme="light"] .free-input-bar textarea {
   max-width: 850px;
   margin: auto;
   padding-top: 40px;
-}
-
-.about-footer {
-  text-align: center;
-  padding: 16px;
-  font-size: 14px;
-  border-top: 1px solid #1f2933;
 }
 
 strong {
@@ -1033,6 +866,58 @@ body[data-theme="light"] strong {
   background: rgba(0, 0, 0, 0.1);
 }
 
+/* ===================== RESPONSIVE (MOBILE) ===================== */
 
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 12px;
+  }
 
+  .page-main {
+    padding: 8px 10px 60px;
+  }
 
+  /* Compact AI controls on mobile instead of hiding */
+  .ai-controls {
+    position: static;
+    margin: 6px auto 4px;
+    padding: 6px 8px;
+    gap: 4px;
+    border-radius: 10px;
+    min-height: auto;
+  }
+
+  .ai-control {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .ai-control label {
+    font-size: 0.7rem;
+  }
+
+  .ai-control select,
+  .ai-control input {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 0.75rem;
+  }
+
+  /* Chat starts just below the compact controls */
+  .free-chat-window {
+    padding: 6px 8px 100px;
+  }
+
+  .free-input-wrapper {
+    bottom: 10px;
+  }
+
+  .free-input-bar {
+    margin: 0 8px;
+    padding: 8px 10px;
+  }
+
+  .free-input-bar textarea {
+    font-size: 0.9rem;
+  }
+}
