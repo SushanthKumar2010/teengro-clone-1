@@ -5,61 +5,13 @@
 const backendBaseUrl = "https://new-try-zfki.onrender.com";
 
 const classLevelSelect = document.getElementById("classLevel");
+const boardSelect = document.getElementById("board");
 const subjectSelect = document.getElementById("subject");
-const chapterSelect = document.getElementById("chapter");
+const chapterInput = document.getElementById("chapter");
 const questionInput = document.getElementById("questionInput");
 const sendBtn = document.getElementById("sendBtn");
 const chatWindow = document.getElementById("chatWindow");
 const questionForm = document.getElementById("questionForm");
-
-/*********************************************************
- * CHAPTER DATA
- *********************************************************/
-
-const CHAPTERS = {
-  Maths: [
-    "Commercial Mathematics",
-    "Algebra",
-    "Geometry",
-    "Mensuration",
-    "Trigonometry",
-  ],
-  Physics: [
-    "Force, Work, Power and Energy",
-    "Light",
-    "Sound",
-    "Electricity and Magnetism",
-    "Heat",
-    "Modern Physics",
-  ],
-};
-
-function populateChapters() {
-  if (!subjectSelect || !chapterSelect) return;
-
-  const subject = subjectSelect.value;
-  chapterSelect.innerHTML = "";
-
-  (CHAPTERS[subject] || []).forEach((ch) => {
-    const opt = document.createElement("option");
-    opt.value = ch;
-    opt.textContent = ch;
-    chapterSelect.appendChild(opt);
-  });
-}
-
-if (subjectSelect) {
-  subjectSelect.addEventListener("change", populateChapters);
-  populateChapters();
-}
-
-/*********************************************************
- * GREETING DETECTOR (IMPORTANT FIX)
- *********************************************************/
-
-function isGreeting(text) {
-  return /^(hi|hello|hey|yo|hai)$/i.test(text.trim());
-}
 
 /*********************************************************
  * GEMINI RESPONSE FORMATTER
@@ -83,20 +35,20 @@ function appendMessage(role, text, meta) {
   if (!chatWindow) return;
 
   const row = document.createElement("div");
-  row.classList.add("message-row", role);
+  row.className = `message-row ${role}`;
 
   const bubble = document.createElement("div");
-  bubble.classList.add("message-bubble");
+  bubble.className = "message-bubble";
 
   if (role === "bot" && meta) {
     const metaDiv = document.createElement("div");
-    metaDiv.classList.add("meta-text");
-    metaDiv.textContent = `${meta.class_level} • ${meta.subject} • ${meta.chapter}`;
+    metaDiv.className = "meta-text";
+    metaDiv.textContent =
+      `${meta.board} • Class ${meta.class_level} • ${meta.subject} • ${meta.chapter}`;
     bubble.appendChild(metaDiv);
   }
 
   const content = document.createElement("div");
-
   if (role === "bot") {
     content.innerHTML = formatGeminiResponse(text);
   } else {
@@ -110,7 +62,7 @@ function appendMessage(role, text, meta) {
 }
 
 /*********************************************************
- * SEND QUESTION (FIXED)
+ * SEND QUESTION (FIXED: BOARD ADDED)
  *********************************************************/
 
 async function sendQuestion() {
@@ -120,35 +72,20 @@ async function sendQuestion() {
   if (!question) return;
 
   appendMessage("user", question);
+
   questionInput.value = "";
-
-  // 🔥 FIX: handle greetings locally
-  if (isGreeting(question)) {
-    appendMessage(
-      "bot",
-      `Hello! What would you like help with in ${subjectSelect.value} for Class ${classLevelSelect.value}?`,
-      {
-        class_level: classLevelSelect.value,
-        subject: subjectSelect.value,
-        chapter: chapterSelect.value || "General",
-      }
-    );
-    return;
-  }
-
-  const originalBtnContent = sendBtn.innerHTML;
   questionInput.disabled = true;
   sendBtn.disabled = true;
-  sendBtn.innerHTML = '<div class="send-spinner"></div>';
 
   try {
     const response = await fetch(`${backendBaseUrl}/api/ask`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        class_level: classLevelSelect?.value || "",
-        subject: subjectSelect?.value || "",
-        chapter: chapterSelect?.value || "",
+        board: boardSelect?.value || "ICSE",
+        class_level: classLevelSelect?.value || "10",
+        subject: subjectSelect?.value || "General",
+        chapter: chapterInput?.value || "General",
         question,
       }),
     });
@@ -158,7 +95,7 @@ async function sendQuestion() {
     if (!response.ok) {
       appendMessage(
         "bot",
-        `Error: ${data.detail || data.error || "Something went wrong"}`
+        data.detail || "Something went wrong"
       );
     } else {
       appendMessage("bot", data.answer || "No answer received.", data.meta);
@@ -168,14 +105,9 @@ async function sendQuestion() {
   } finally {
     questionInput.disabled = false;
     sendBtn.disabled = false;
-    sendBtn.innerHTML = originalBtnContent || "Ask";
     questionInput.focus();
   }
 }
-
-/*********************************************************
- * INPUT EVENTS
- *********************************************************/
 
 if (sendBtn) {
   sendBtn.addEventListener("click", sendQuestion);
@@ -198,7 +130,7 @@ if (questionForm) {
 }
 
 /*********************************************************
- * SUPABASE LOGIN
+ * SUPABASE LOGIN (UNCHANGED)
  *********************************************************/
 
 const SUPABASE_URL = "https://ctquajydjitfjhqvezfz.supabase.co";
@@ -207,7 +139,10 @@ const SUPABASE_ANON_KEY =
 
 let supabaseClient = null;
 if (typeof supabase !== "undefined") {
-  supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
 }
 
 async function login(event) {
@@ -222,10 +157,11 @@ async function login(event) {
     return;
   }
 
-  const { error } = await supabaseClient.auth.signInWithPassword({
-    email,
-    password,
-  });
+  const { error } =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password,
+    });
 
   if (error) {
     alert("Wrong email or password");
@@ -244,9 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuDropdown = document.getElementById("menuDropdown");
   const themeToggle = document.getElementById("themeToggle");
 
-  const savedTheme = localStorage.getItem("theme");
-  const theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
-  document.body.setAttribute("data-theme", theme);
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  document.body.setAttribute("data-theme", savedTheme);
 
   if (menuToggle && menuDropdown) {
     menuToggle.addEventListener("click", (e) => {
@@ -255,7 +190,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("click", (e) => {
-      if (!menuDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+      if (
+        !menuDropdown.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
         menuDropdown.classList.remove("open");
       }
     });
@@ -263,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
-      const current = document.body.getAttribute("data-theme") || "dark";
+      const current = document.body.getAttribute("data-theme");
       const next = current === "dark" ? "light" : "dark";
       document.body.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
