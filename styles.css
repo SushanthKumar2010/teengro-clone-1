@@ -287,7 +287,7 @@ body[data-theme="light"] .menu-dropdown button:hover {
   }
   51%,
   100% {
-    opacity: 0;
+  opacity: 0;
   }
 }
 
@@ -560,7 +560,7 @@ body[data-theme="light"] .login-field input::placeholder {
   margin-bottom: 4px;
 }
 
-/* ===================== AI CONTROLS ===================== */
+/* ===================== AI CONTROLS (FIXED TOP UNDER NAVBAR) ===================== */
 
 .ai-shell {
   max-width: 960px;
@@ -568,25 +568,21 @@ body[data-theme="light"] .login-field input::placeholder {
   margin: 0 auto;
 }
 
-/* Controls row under navbar (desktop/tablet) */
-
+/* Controls fixed under navbar, centered within max-width */
 .ai-controls {
-  position: sticky;
-  top: 56px;              /* under navbar */
-  z-index: 150;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 56px;               /* just below navbar */
+  z-index: 140;
   max-width: 900px;
-  margin: 8px auto 0;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   border-radius: 14px;
   border: 1px solid #1f2933;
-  min-height: 64px;       /* reserve vertical space so chat starts below */
-}
-
-/* Container background per theme */
-body[data-theme="dark"] .ai-controls {
   background: #020617;
 }
 
@@ -609,7 +605,6 @@ body[data-theme="light"] .ai-controls {
   font-weight: 500;
 }
 
-/* Labels per theme */
 body[data-theme="dark"] .ai-control label {
   color: #e5e7eb;
 }
@@ -629,7 +624,6 @@ body[data-theme="light"] .ai-control label {
   transition: border 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-/* Controls text + background per theme */
 body[data-theme="dark"] .ai-control select,
 body[data-theme="dark"] .ai-control input {
   color: #e5e7eb;
@@ -678,20 +672,18 @@ body[data-theme="light"] .ai-control input:focus {
   align-items: center;
 }
 
-/* Scrollable chat area: top padding clears navbar + controls */
+/* Chat area: top padding = navbar + controls, so answers never go behind */
 
 .free-chat-window {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 88px 12px 120px;  /* 88px = space for navbar + sticky controls */
+  padding: 132px 12px 200px;   /* 132px top ensures chat starts below controls */
   display: flex;
   flex-direction: column;
   gap: 12px;
   overflow-y: auto;
 }
-
-/* Scrollbar */
 
 .free-chat-window::-webkit-scrollbar {
   width: 6px;
@@ -702,7 +694,7 @@ body[data-theme="light"] .ai-control input:focus {
   border-radius: 999px;
 }
 
-/* Floating input centered near bottom */
+/* Floating input centered at bottom */
 
 .free-input-wrapper {
   position: fixed;
@@ -713,8 +705,6 @@ body[data-theme="light"] .ai-control input:focus {
   justify-content: center;
   pointer-events: none;
 }
-
-/* Actual bar */
 
 .free-input-bar {
   pointer-events: auto;
@@ -744,7 +734,6 @@ body[data-theme="light"] .ai-control input:focus {
   overflow-y: auto;
 }
 
-/* Text color in input bar per theme */
 body[data-theme="dark"] .free-input-bar textarea {
   color: #e5e7eb;
 }
@@ -792,7 +781,7 @@ body[data-theme="light"] .free-input-bar textarea {
   box-shadow: none;
 }
 
-/* Loading spinner inside send button */
+/* Loading spinner */
 
 .send-spinner {
   width: 18px;
@@ -877,18 +866,15 @@ body[data-theme="light"] strong {
     padding: 8px 10px 60px;
   }
 
-  /* Compact AI controls on mobile instead of hiding */
   .ai-controls {
-    position: static;
-    margin: 6px auto 4px;
+    top: 52px;              /* slightly tighter under navbar */
     padding: 6px 8px;
     gap: 4px;
     border-radius: 10px;
-    min-height: auto;
   }
 
   .ai-control {
-    flex: 1 1 0;
+    flex: 1 1 48%;
     min-width: 0;
   }
 
@@ -903,9 +889,9 @@ body[data-theme="light"] strong {
     font-size: 0.75rem;
   }
 
-  /* Chat starts just below the compact controls */
+  /* Smaller top padding but still clears navbar + controls */
   .free-chat-window {
-    padding: 6px 8px 100px;
+    padding: 118px 8px 210px;
   }
 
   .free-input-wrapper {
