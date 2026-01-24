@@ -12,6 +12,10 @@ const sendBtn = document.getElementById("sendBtn");
 const chatWindow = document.getElementById("chatWindow");
 const questionForm = document.getElementById("questionForm");
 
+/*********************************************************
+ * CHAPTER DATA
+ *********************************************************/
+
 const CHAPTERS = {
   Maths: [
     "Commercial Mathematics",
@@ -32,8 +36,10 @@ const CHAPTERS = {
 
 function populateChapters() {
   if (!subjectSelect || !chapterSelect) return;
+
   const subject = subjectSelect.value;
   chapterSelect.innerHTML = "";
+
   (CHAPTERS[subject] || []).forEach((ch) => {
     const opt = document.createElement("option");
     opt.value = ch;
@@ -48,20 +54,24 @@ if (subjectSelect) {
 }
 
 /*********************************************************
+ * GREETING DETECTOR (IMPORTANT FIX)
+ *********************************************************/
+
+function isGreeting(text) {
+  return /^(hi|hello|hey|yo|hai)$/i.test(text.trim());
+}
+
+/*********************************************************
  * GEMINI RESPONSE FORMATTER
- * Converts *important* → <strong>important</strong>
  *********************************************************/
 
 function formatGeminiResponse(text) {
   if (!text) return "";
 
   return text
-    // Escape HTML for safety
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    // Convert *text* to bold
     .replace(/\*(.*?)\*/g, "<strong>$1</strong>")
-    // Line breaks
     .replace(/\n/g, "<br>");
 }
 
@@ -85,19 +95,23 @@ function appendMessage(role, text, meta) {
     bubble.appendChild(metaDiv);
   }
 
-  const p = document.createElement("div");
+  const content = document.createElement("div");
 
   if (role === "bot") {
-    p.innerHTML = formatGeminiResponse(text);
+    content.innerHTML = formatGeminiResponse(text);
   } else {
-    p.innerText = text;
+    content.innerText = text;
   }
 
-  bubble.appendChild(p);
+  bubble.appendChild(content);
   row.appendChild(bubble);
   chatWindow.appendChild(row);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
+
+/*********************************************************
+ * SEND QUESTION (FIXED)
+ *********************************************************/
 
 async function sendQuestion() {
   if (!questionInput || !sendBtn) return;
@@ -106,10 +120,23 @@ async function sendQuestion() {
   if (!question) return;
 
   appendMessage("user", question);
+  questionInput.value = "";
+
+  // 🔥 FIX: handle greetings locally
+  if (isGreeting(question)) {
+    appendMessage(
+      "bot",
+      `Hello! What would you like help with in ${subjectSelect.value} for Class ${classLevelSelect.value}?`,
+      {
+        class_level: classLevelSelect.value,
+        subject: subjectSelect.value,
+        chapter: chapterSelect.value || "General",
+      }
+    );
+    return;
+  }
 
   const originalBtnContent = sendBtn.innerHTML;
-
-  questionInput.value = "";
   questionInput.disabled = true;
   sendBtn.disabled = true;
   sendBtn.innerHTML = '<div class="send-spinner"></div>';
@@ -146,6 +173,10 @@ async function sendQuestion() {
   }
 }
 
+/*********************************************************
+ * INPUT EVENTS
+ *********************************************************/
+
 if (sendBtn) {
   sendBtn.addEventListener("click", sendQuestion);
 }
@@ -181,19 +212,10 @@ if (typeof supabase !== "undefined") {
 
 async function login(event) {
   if (event) event.preventDefault();
+  if (!supabaseClient) return;
 
-  if (!supabaseClient) {
-    alert("Supabase is not loaded on this page.");
-    return;
-  }
-
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-
-  if (!emailInput || !passwordInput) return;
-
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
+  const email = document.getElementById("email")?.value.trim();
+  const password = document.getElementById("password")?.value;
 
   if (!email || !password) {
     alert("Please enter email and password");
@@ -206,7 +228,7 @@ async function login(event) {
   });
 
   if (error) {
-    alert("❌ Wrong email or password");
+    alert("Wrong email or password");
     return;
   }
 
@@ -223,9 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
 
   const savedTheme = localStorage.getItem("theme");
-  const initialTheme =
-    savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
-  document.body.setAttribute("data-theme", initialTheme);
+  const theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+  document.body.setAttribute("data-theme", theme);
 
   if (menuToggle && menuDropdown) {
     menuToggle.addEventListener("click", (e) => {
@@ -234,10 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("click", (e) => {
-      if (
-        !menuDropdown.contains(e.target) &&
-        !menuToggle.contains(e.target)
-      ) {
+      if (!menuDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
         menuDropdown.classList.remove("open");
       }
     });
