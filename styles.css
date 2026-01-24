@@ -836,7 +836,12 @@ body[data-theme="light"] .free-input-bar textarea {
   color: #000000;
   margin-bottom: 8px;
 }
-
+body[data-theme="light"] .section p, section li {
+  color: #000000;
+}
+body[data-theme="dark"] .section p, section li {
+  color: #FFFFFF;
+}
 .founder-section {
   text-align: center;
   max-width: 850px;
@@ -907,4 +912,5 @@ body[data-theme="light"] strong {
     font-size: 0.9rem;
   }
 }
+
 
