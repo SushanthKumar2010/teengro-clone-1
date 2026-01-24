@@ -47,6 +47,28 @@ if (subjectSelect) {
   populateChapters();
 }
 
+/*********************************************************
+ * GEMINI RESPONSE FORMATTER
+ * Converts *important* → <strong>important</strong>
+ *********************************************************/
+
+function formatGeminiResponse(text) {
+  if (!text) return "";
+
+  return text
+    // Escape HTML for safety
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    // Convert *text* to bold
+    .replace(/\*(.*?)\*/g, "<strong>$1</strong>")
+    // Line breaks
+    .replace(/\n/g, "<br>");
+}
+
+/*********************************************************
+ * CHAT UI
+ *********************************************************/
+
 function appendMessage(role, text, meta) {
   if (!chatWindow) return;
 
@@ -64,9 +86,14 @@ function appendMessage(role, text, meta) {
   }
 
   const p = document.createElement("div");
-  p.innerText = text;
-  bubble.appendChild(p);
 
+  if (role === "bot") {
+    p.innerHTML = formatGeminiResponse(text);
+  } else {
+    p.innerText = text;
+  }
+
+  bubble.appendChild(p);
   row.appendChild(bubble);
   chatWindow.appendChild(row);
   chatWindow.scrollTop = chatWindow.scrollHeight;
