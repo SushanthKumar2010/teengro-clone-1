@@ -7,16 +7,12 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-    /* =====================
-       HERO SPACING CONTROL
-    ====================== */
-
     .typewriter {
       margin-bottom: 16px;
     }
 
     .login-cta {
-      margin-top: 120px; /* ⬅⬅ PUSHED WAY DOWN */
+      margin-top: 120px;
       margin-bottom: 16px;
       display: flex;
       justify-content: center;
@@ -33,7 +29,6 @@
       transition: all 0.25s ease;
     }
 
-    /* DARK THEME */
     body[data-theme="dark"] .login-btn {
       background: #ffffff;
       color: #000000;
@@ -45,7 +40,6 @@
       color: #ffffff;
     }
 
-    /* LIGHT THEME */
     body[data-theme="light"] .login-btn {
       background: #000000;
       color: #ffffff;
@@ -61,102 +55,125 @@
 
 <body data-theme="dark">
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo"><b>Teengro</b></div>
+<header class="navbar">
+  <div class="logo"><b>Teengro</b></div>
 
-    <div class="nav-right">
-      <button class="hamburger" id="menuToggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
+  <div class="nav-right">
+    <button class="hamburger" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 
-    <div class="menu-dropdown" id="menuDropdown">
-      <a href="index.html">Home</a>
-      <a href="login.html">Login</a>
-      <a href="founder.html">Meet the Founder</a>
-      <button id="themeToggle">Change theme</button>
-    </div>
-  </header>
+  <div class="menu-dropdown" id="menuDropdown">
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="founder.html">Meet the Founder</a>
+    <button id="themeToggle">Change theme</button>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Your personal AI tutor for</h1>
+<section class="hero">
+  <h1>Your personal AI tutor for</h1>
 
-    <div class="typewriter">
-      <span id="text"></span><span class="cursor">|</span>
-    </div>
+  <div class="typewriter">
+    <span id="text"></span><span class="cursor">|</span>
+  </div>
 
-    <!-- LOGIN CTA (VERY LOW) -->
-    <div class="login-cta">
-      <a href="login.html">
-        <button class="login-btn" id="loginBtn"></button>
-      </a>
-    </div>
-  </section>
+  <!-- NEW SUBTITLE -->
+  <p class="hero-subtitle">
+    Clear explanations. Focused learning. No distractions.
+  </p>
 
-  <!-- NEXT SECTION -->
-  <section class="section">
-    <h2>Why Teengro?</h2>
-    <p>
-      Teengro gives students a focused AI tutor that explains concepts
-      step-by-step, adapts to how you think, and helps you truly understand —
-      not just memorise.
-    </p>
-  </section>
+  <div class="login-cta">
+    <a href="login.html">
+      <button class="login-btn" id="loginBtn"></button>
+    </a>
+  </div>
+</section>
 
-  <footer class="about-footer">
-    © 2026 Teengro. Built for focused learning.
-  </footer>
+<!-- WHY TEENGRO -->
+<section class="section">
+  <h2>Why Teengro?</h2>
 
-  <!-- JS -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
+  <p>
+    Most students don’t struggle because they’re weak — they struggle because
+    explanations are rushed, confusing, or overloaded.
+  </p>
 
-      /* TYPEWRITER */
-      const el = document.getElementById("text");
-      const words = [
-        "Mathematics",
-        "Physics",
-        "Chemistry",
-        "Biology",
-        "English Literature",
-        "English Grammar",
-        "Geography",
-        "History & Civics",
-        "Computer Applications"
-      ];
+  <p>
+    <strong>Teengro fixes that.</strong> It breaks concepts down step-by-step,
+    adapts to your level, and helps you think clearly instead of memorising blindly.
+  </p>
 
-      let i = 0, j = 0, del = false;
+  <ul>
+    <li>Step-by-step explanations, not instant answers</li>
+    <li>Designed for teens — simple language, clear logic</li>
+    <li>Minimal UI that keeps distractions away</li>
+    <li>Learn at your own pace, without pressure</li>
+  </ul>
+</section>
 
-      function loop() {
-        const word = words[i];
-        el.textContent = del
-          ? word.substring(0, j--)
-          : word.substring(0, j++);
+<!-- HOW IT WORKS -->
+<section class="section">
+  <h2>How It Works</h2>
+  <ul>
+    <li>Ask doubts or concepts in your own words</li>
+    <li>Get clear, structured explanations</li>
+    <li>Understand from basics to application</li>
+    <li>Practice and revise without overwhelm</li>
+  </ul>
+</section>
 
-        if (!del && j === word.length) {
-          setTimeout(() => del = true, 1200);
-        }
+<!-- WHO IT IS FOR -->
+<section class="section">
+  <h2>Who Teengro Is For</h2>
+  <ul>
+    <li>Students in grades 8–12</li>
+    <li>Board exam & competitive exam aspirants</li>
+    <li>Students who want clarity, not shortcuts</li>
+    <li>Anyone tired of confusing explanations</li>
+  </ul>
+</section>
 
-        if (del && j === 0) {
-          del = false;
-          i = (i + 1) % words.length;
-        }
+<footer class="about-footer">
+  © 2026 Teengro. Built by a student, for students.
+</footer>
 
-        setTimeout(loop, del ? 80 : 120);
-      }
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const el = document.getElementById("text");
+  const words = [
+    "Maths","Physics","Chemistry","Biology",
+    "English Literature","English Grammar",
+    "Geography","History & Civics",
+    "Computer Applications"
+  ];
 
-      loop();
+  let i = 0, j = 0, del = false;
 
-      /* LOGIN TEXT */
-      document.getElementById("loginBtn").textContent = "Login";
-    });
-  </script>
+  function loop() {
+    const word = words[i];
+    el.textContent = del
+      ? word.substring(0, j--)
+      : word.substring(0, j++);
 
-  <script src="script.js"></script>
+    if (!del && j === word.length) {
+      setTimeout(() => del = true, 1200);
+    }
+
+    if (del && j === 0) {
+      del = false;
+      i = (i + 1) % words.length;
+    }
+
+    setTimeout(loop, del ? 80 : 120);
+  }
+
+  loop();
+  document.getElementById("loginBtn").textContent = "Login";
+});
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>
-
