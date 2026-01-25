@@ -948,5 +948,12 @@ body[data-theme="light"] .hero-subtitle {
   color: #000000;
 }
 
+body[data-theme="dark"] .section p,
+body[data-theme="dark"] .section li,
+body[data-theme="dark"] .section h2,
+body[data-theme="dark"] .hero-subtitle {
+  color: #ffffff;
+}
+
 
 
