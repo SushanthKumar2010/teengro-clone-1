@@ -339,6 +339,7 @@ body[data-theme="light"] .menu-dropdown button:hover {
 
 .login-page {
   align-items: center;
+  padding-top: 100px;
 }
 
 .light-login-card {
@@ -406,8 +407,6 @@ body[data-theme="light"] .login-header p {
 }
 
 .login-form {
-  justify-content: center;
-  align-items: center;
   max-width: 420px;
   margin: 0 auto;
   display: flex;
@@ -956,6 +955,7 @@ body[data-theme="dark"] .section h2,
 body[data-theme="dark"] .hero-subtitle {
   color: #ffffff;
 }
+
 
 
 
