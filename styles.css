@@ -776,18 +776,19 @@ body[data-theme="light"] .free-input-bar textarea {
 }
 
 .free-input-bar button:disabled {
-  opacity: 1;
+  background: #6b7280;
   cursor: not-allowed;
   box-shadow: none;
 }
 
 /* Loading spinner */
+
 .send-spinner {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid rgba(2, 6, 23, 0.35);
-  border-top-color: #020617;
+  border: 2px solid rgba(249, 250, 251, 0.4);
+  border-top-color: #f9fafb;
   animation: send-spin 0.6s linear infinite;
 }
 
@@ -796,7 +797,6 @@ body[data-theme="light"] .free-input-bar textarea {
     transform: rotate(360deg);
   }
 }
-
 
 /* === NEW ABOUT & FOUNDER STYLES === */
 
@@ -833,15 +833,10 @@ body[data-theme="light"] .free-input-bar textarea {
 .section p,
 .section li {
   font-size: 17px;
-  color: #000000;
+  color: #d1d5db;
   margin-bottom: 8px;
 }
-body[data-theme="light"] .section p, section li{
-  color: #000000;
-}
-body[data-theme="dark"] .section p, section li{
-  color: #FFFFFF;
-}
+
 .founder-section {
   text-align: center;
   max-width: 850px;
@@ -912,8 +907,46 @@ body[data-theme="light"] strong {
     font-size: 0.9rem;
   }
 }
+/* === HOMEPAGE ADDITIONS ONLY === */
 
+.hero-subtitle {
+  font-size: 20px;
+  opacity: 0.85;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  text-align: center;
+}
 
+/* Lists look clean & readable */
+.section ul {
+  margin-top: 12px;
+  padding-left: 18px;
+}
+
+.section li {
+  margin-bottom: 8px;
+}
+
+/* Emphasis without color change */
+strong {
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Light theme emphasis background */
+body[data-theme="light"] strong {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* === FORCE BLACK TEXT IN LIGHT THEME (HOMEPAGE) === */
+body[data-theme="light"] .section p,
+body[data-theme="light"] .section li,
+body[data-theme="light"] .section h2,
+body[data-theme="light"] .hero-subtitle {
+  color: #000000;
+}
 
 
 
