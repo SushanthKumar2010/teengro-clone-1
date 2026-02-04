@@ -49,7 +49,7 @@ The AI tutor follows a clarity-first approach:
 - It does not issue grades, certificates, or official academic credentials
 - It does not replace schools, teachers, or coaching institutes
 
-## Founder
+## Founder - Bandaru Sushanth Kumar
 Teengro and the Teengro AI Tutor were founded by a teenage student and digital creator with hands-on experience in technology, digital marketing, and platform building.
 
 ### Founder Background
