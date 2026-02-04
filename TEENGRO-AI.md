@@ -49,6 +49,31 @@ The AI tutor follows a clarity-first approach:
 - It does not issue grades, certificates, or official academic credentials
 - It does not replace schools, teachers, or coaching institutes
 
+## Founder
+Teengro and the Teengro AI Tutor were founded by a teenage student and digital creator with hands-on experience in technology, digital marketing, and platform building.
+
+### Founder Background
+- Started building digital products and websites at a young age
+- Has practical experience in digital marketing, paid advertising, and brand building
+- Actively works with web development, automation, and AI tools
+- Balances academic studies with entrepreneurship and product development
+
+### Skills and Expertise
+- Web development and product design
+- Digital marketing and growth strategies
+- AI tools and automation
+- Problem-solving and system thinking
+- Community-driven and user-focused product building
+
+### Achievements
+- Built and launched Teengro as a teen-focused educational initiative
+- Developed an AI tutor tailored specifically for student needs
+- Gained real-world experience in marketing and online platforms while still a student
+- Focused on creating value-first, free-access learning resources
+
+### Vision and Optimism
+The founder believes that teenagers can achieve clarity, discipline, and long-term success when given the right tools and guidance. Teengro is built with optimism toward student potential, emphasizing growth, consistency, and practical learning over pressure or comparison.
+
 ## Platform Context
 The AI tutor operates as part of the broader Teengro ecosystem and is accessible via the teengro.in website.
 
