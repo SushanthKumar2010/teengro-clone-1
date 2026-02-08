@@ -957,6 +957,95 @@ body[data-theme="dark"] .hero-subtitle {
 }
 
 
+/* Lists look clean & readable */
+.section ul {
+  margin-top: 12px;
+  padding-left: 18px;
+}
+
+.section li {
+  margin-bottom: 8px;
+}
+
+/* Emphasis without color change */
+strong {
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Light theme emphasis background */
+body[data-theme="light"] strong {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* === FORCE BLACK TEXT IN LIGHT THEME (HOMEPAGE) === */
+body[data-theme="light"] .section p,
+body[data-theme="light"] .section li,
+body[data-theme="light"] .section h2,
+body[data-theme="light"] .hero-subtitle {
+  color: #000000;
+}
+
+body[data-theme="dark"] .section p,
+body[data-theme="dark"] .section li,
+body[data-theme="dark"] .section h2,
+body[data-theme="dark"] .hero-subtitle {
+  color: #ffffff;
+}
+
+
+.auth-message {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-message.error {
+  color: #ef4444;
+}
+
+.auth-message.success {
+  color: #22c55e;
+}
+
+.auth-message.info {
+  color: #60a5fa;
+}
+/* ===============================
+   AUTH MESSAGE (LOGIN / SIGNUP)
+   =============================== */
+
+.auth-message {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Success */
+.auth-message.success {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+/* Error */
+.auth-message.error {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* Hidden by default */
+.auth-message.hidden {
+  display: none;
+}
 
 
 
