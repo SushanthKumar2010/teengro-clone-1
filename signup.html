@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create a Teengro account and start learning with your AI tutor." />
+  <title>Sign Up | Teengro</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="about-body">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo"><b>Teengro</b></div>
+
+    <button class="hamburger" id="menuToggle">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="menu-dropdown" id="menuDropdown">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="founder.html">Meet the Founder</a>
+      <button id="themeToggle">Change theme</button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="page-main" style="flex-direction:column; align-items:center;">
+    <section class="login-card light-login-card">
+      <header class="login-header">
+        <h1>Create account</h1>
+        <p>Start learning with your personal AI tutor.</p>
+      </header>
+
+      <div class="login-divider"></div>
+      <div id="authMessage" class="auth-message hidden"></div>
+
+      <form class="login-form" onsubmit="signup(event)">
+        <div class="login-field">
+          <label>Email</label>
+          <input type="email"
+            id="email"
+            placeholder="your email address"
+            required />
+        </div>
+
+        <div class="login-field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <button class="login-btn primary-btn" type="submit">
+          Create account
+        </button>
+      </form>
+      
+
+      <p class="p1" style="text-align:center; margin-top:10px;">
+        Already have an account?
+        <a href="login.html"><b>Login</b></a>
+      </p>
+<!--
+      <div class="login-divider"></div>
+
+       <div style="display:flex; justify-content:center;">
+        <img
+          src="https://www.svgrepo.com/show/475656/google-color.svg"
+          alt="Login with Google"
+          title="Login with Google"
+          style="width:36px; height:36px; cursor:pointer;"
+          onclick="googleSignup()"
+        />
+      </div> -->
+
+    </section>
+  </main>
+
+  <footer class="about-footer">
+    © 2026 Teengro. Built by a teen, for teens.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
