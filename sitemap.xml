@@ -17,6 +17,11 @@
   </url>
 
   <url>
+    <loc>https://teengro.in/signup.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://teengro.in/founder.html</loc>
     <priority>0.8</priority>
   </url>
