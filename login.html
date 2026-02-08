@@ -5,58 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Login to Teengro and continue learning with your personal AI tutor built for focused study." />
   <title>Login | Teengro</title>
+
   <link rel="stylesheet" href="styles.css" />
- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-  body[data-theme="dark"] .p1 {
-    color: #ffffff;
-  }
-</style>
 </head>
+
 <body class="about-body">
-  <!-- Shared navbar -->
+
+  <!-- Navbar -->
   <header class="navbar">
-  <div class="logo"><b>Teengro</b></div>
+    <div class="logo"><b>Teengro</b></div>
 
-  <button class="hamburger" id="menuToggle" aria-label="Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+    <button class="hamburger" id="menuToggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-  <div class="menu-dropdown" id="menuDropdown">
+    <div class="menu-dropdown" id="menuDropdown">
       <a href="index.html">Home</a>
       <a href="login.html">Login</a>
       <a href="founder.html">Meet the Founder</a>
       <button id="themeToggle">Change theme</button>
     </div>
-</header>
+  </header>
 
-
-  <!-- Centered login card -->
-  <main class="page-main"
-  style="
-    flex-direction: column;
-    align-items: center;
-  "
->
+  <!-- Main -->
+  <main
+    class="page-main"
+    style="flex-direction: column; align-items: center;"
+  >
     <section class="login-card light-login-card">
       <header class="login-header">
         <h1>Welcome back</h1>
-        <p>Login to continue learning with your AI tutor.</p>
+        <p>Login or create an account to continue learning.</p>
       </header>
 
       <div class="login-divider"></div>
+      
+      <div id="authMessage" class="auth-message hidden"></div>
 
-      <form class="login-form" onsubmit="login(event)" style="justify-content: center;">
+      <!-- Email Login / Signup -->
+      <form class="login-form" onsubmit="login(event)">
         <div class="login-field">
           <label for="email">Email</label>
           <input
             type="email"
             id="email"
-            placeholder="your registered email"
+            placeholder="your email address"
             required
           />
         </div>
@@ -72,26 +70,51 @@
         </div>
 
         <button type="submit" class="login-btn primary-btn">
-          Login
+          Continue
         </button>
       </form>
-    </section><br><br><br>
-  <p class="p1"
-    id="dm-note"
-    style="
-      margin-top: 12px;
-      text-align: center;
-      font-size: 0.95rem;
-      opacity: 0.85;">
 
-      <b> <i>"DM"</i> <a href="https://www.instagram.com/teengro.in/"><b>teengro.in</b></a> to get your account registered.</b>
+      <p class="p1" style="text-align:center; margin-top:10px;">
+  New here?
+  <a href="signup.html"><b>Create an account</b></a>
+</p>
 
-  </p>
+<!--
+      <div class="login-divider"></div>
+
+      Google icon login (NO THEME CSS) 
+      <div style="display:flex; justify-content:center;">
+        <img
+          src="https://www.svgrepo.com/show/475656/google-color.svg"
+          alt="Login with Google"
+          title="Login with Google"
+          style="width:36px; height:36px; cursor:pointer;"
+          onclick="googleLogin()"
+        />
+      </div>-->
+      
+    </section> 
+
+    <!-- Support note -->
+    <p
+      class="p1"
+      style="margin-top:16px; text-align:center; font-size:0.95rem; opacity:0.85;"
+    >
+      <b>
+        Need help?
+        DM
+        <a href="https://www.instagram.com/teengro.in/" target="_blank">
+          <b>@teengro.in</b>
+        </a>
+      </b>
+    </p>
   </main>
-<footer class="about-footer">
+
+  <footer class="about-footer">
     © 2026 Teengro. Built by a teen, for teens.
   </footer>
+
   <script src="script.js"></script>
 </body>
-
 </html>
+
