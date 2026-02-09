@@ -5,135 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="robots" content="noindex"/>
   <title>Dashboard | Teengro</title>
+
   <link rel="stylesheet" href="styles.css" />
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
-  /* Lock navbar on this page only */
-  .navbar {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-
-  /* Prevent content from going under navbar */
-  .page-main {
-    padding-top: 70px; /* adjust if navbar height differs */
-  }
-</style>
-
+    .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+    .page-main { padding-top: 70px; }
+  </style>
 </head>
+
 <body class="about-body" data-theme="dark">
-  <!-- Navbar -->
-  <header class="navbar" style="position:relative;">
-    <div style="display:flex; align-items:center;">
-      <div class="logo"><b>Teengro</b></div>
+
+<header class="navbar">
+  <div class="logo"><b>Teengro</b></div>
+  <button class="hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+  <div class="menu-dropdown" id="menuDropdown">
+    <a href="index.html">Home</a>
+    <button onclick="logout()">Logout</button>
+    <a href="help.html">Contact/help</a>
+    <a href="founder.html">Meet the Founder</a>
+    <button id="themeToggle">Change theme</button>
+  </div>
+</header>
+
+<main class="page-main">
+  <div class="ai-shell">
+
+    <section class="ai-controls">
+      <div class="ai-control">
+        <label>Class</label>
+        <select id="classLevel">
+          <option>8</option><option>9</option>
+          <option selected>10</option>
+          <option>11</option><option>12</option>
+        </select>
+      </div>
+
+      <div class="ai-control">
+        <label>Board</label>
+        <select id="board">
+          <option selected>ICSE</option>
+          <option>CBSE</option>
+          <option>SSLC</option>
+        </select>
+      </div>
+
+      <div class="ai-control">
+        <label>Subject</label>
+        <select id="subject">
+          <option>Maths</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Biology</option>
+        </select>
+      </div>
+
+      <div class="ai-control">
+        <label>Chapter</label>
+        <input id="chapter" placeholder="e.g. Quadratic Equations" />
+      </div>
+    </section>
+
+    <section class="free-chat-shell">
+      <div id="chatWindow" class="free-chat-window"></div>
+
+      <div class="free-input-wrapper">
+  <form id="questionForm" class="free-input-bar">
+
+    <textarea
+      id="questionInput"
+      placeholder="Ask anything…"
+      rows="1"
+    ></textarea>
+
+    <!-- MODEL SELECTOR -->
+    <div class="model-selector">
+      <button type="button" id="modelBtn" class="icon-btn" title="Choose model">
+        ⚡
+      </button>
+
+      <div id="modelDropdown" class="model-dropdown">
+        <div data-model="t1">T1 ⚡ (fast, less detailed)</div>
+        <div data-model="t2">T2 🧠 (slow, more detailed)</div>
+      </div>
     </div>
 
-    <button class="hamburger" id="menuToggle" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <button type="submit" id="sendBtn">→</button>
+  </form>
+</div>
 
-    <div class="menu-dropdown" id="menuDropdown">
-      <a href="index.html">Home</a>
-      <button onclick="logout()">Logout</button>
-      <a href="help.html">Contact/need help</a>
-      <a href="founder.html">Meet the Founder</a>
-      <button id="themeToggle">Change theme</button>
-    </div>
-  </header>
+    </section>
 
-  <main class="page-main">
-    <div class="ai-shell">
-      <!-- Controls row -->
-      <section class="ai-controls">
-        <div class="ai-control">
-          <label for="classLevel">Class</label>
-          <select id="classLevel">
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10" selected>10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
-        </div>
+  </div>
+</main>
 
-        <div class="ai-control">
-          <label for="board">Board</label>
-          <select id="board">
-            <option value="ICSE" selected>ICSE</option>
-            <option value="CBSE">CBSE</option>
-            <option value="SSLC">State (Karnataka)</option>
-          </select>
-        </div>
-
-        <div class="ai-control">
-          <label for="subject">Subject</label>
-          <select id="subject">
-            <option value="Maths">Maths</option>
-            <option value="Physics">Physics</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Biology">Biology</option>
-            <option value="English Literature">English Literature</option>
-            <option value="English Grammar">English Grammar</option>
-            <option value="History">History & Civics</option>
-            <option value="Geography">Geography</option>
-            <option value="Computer Applications">Computer Applications</option>
-          </select>
-        </div>
-
-        <div class="ai-control">
-          <label for="chapter">Chapter</label>
-          <input
-            id="chapter"
-            type="text"
-            placeholder="e.g. Quadratic Equations, Light, etc."
-          />
-        </div>
-      </section>
-
-      <!-- Chat body -->
-      <section class="free-chat-shell">
-        <div id="chatWindow" class="free-chat-window">
-          <!-- messages injected here -->
-        </div>
-
-        <div class="free-input-wrapper">
-          <div class="free-input-bar">
-            <textarea
-              id="questionInput"
-              placeholder="Ask anything..."
-            ></textarea>
-            <button id="sendBtn" onclick="sendQuestion()">
-              →
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
