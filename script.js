@@ -1,8 +1,17 @@
+
 /*********************************************************
  * CHAT CONFIG (Render backend)
  *********************************************************/
-const backendBaseUrl = "https://new-try-zfki.onrender.com";
+const backendBaseUrl = "https://model-tr.onrender.com";
 
+/*********************************************************
+ * MODEL SELECTION STATE (ADDED)
+ *********************************************************/
+let selectedModel = "t1"; // t1 = fast, t2 = detailed
+
+/*********************************************************
+ * DOM ELEMENTS
+ *********************************************************/
 const classLevelSelect = document.getElementById("classLevel");
 const boardSelect = document.getElementById("board");
 const subjectSelect = document.getElementById("subject");
@@ -11,6 +20,10 @@ const questionInput = document.getElementById("questionInput");
 const sendBtn = document.getElementById("sendBtn");
 const chatWindow = document.getElementById("chatWindow");
 const questionForm = document.getElementById("questionForm");
+
+/* MODEL SELECTOR DOM (ADDED) */
+const modelBtn = document.getElementById("modelBtn");
+const modelDropdown = document.getElementById("modelDropdown");
 
 /*********************************************************
  * GEMINI RESPONSE FORMATTER
@@ -56,7 +69,7 @@ function appendMessage(role, text, meta) {
 }
 
 /*********************************************************
- * SEND QUESTION
+ * SEND QUESTION (MODEL ADDED)
  *********************************************************/
 async function sendQuestion() {
   if (!questionInput || !sendBtn) return;
@@ -80,6 +93,7 @@ async function sendQuestion() {
         subject: subjectSelect?.value || "General",
         chapter: chapterInput?.value || "General",
         question,
+        model: selectedModel, // 🔥 ADDED
       }),
     });
 
@@ -112,11 +126,33 @@ questionForm?.addEventListener("submit", (e) => {
 });
 
 /*********************************************************
+ * MODEL SELECTOR LOGIC (ADDED)
+ *********************************************************/
+modelBtn?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  modelDropdown.style.display =
+    modelDropdown.style.display === "block" ? "none" : "block";
+});
+
+modelDropdown?.addEventListener("click", (e) => {
+  const model = e.target.dataset.model;
+  if (!model) return;
+
+  selectedModel = model;
+  modelBtn.textContent = model === "t1" ? "⚡" : "🧠";
+  modelDropdown.style.display = "none";
+});
+
+document.addEventListener("click", () => {
+  if (modelDropdown) modelDropdown.style.display = "none";
+});
+
+/*********************************************************
  * SUPABASE CONFIG
  *********************************************************/
 const SUPABASE_URL = "https://ctquajydjitfjhqvezfz.supabase.co";
 const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0cXVhanlkaml0ZmpocXZlemZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2MjA1MzQsImV4cCI6MjA4MzE5NjUzNH0.3cenuqB4XffJdRQisJQhq7PS9_ybXDN7ExbsKfXx9gU";
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN0cXVhanlkaml0ZmpocXZlemZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc2MjA1MzQsImV4cCI6MjA4MzE5NjUzNH0.3cenuqB4XffJdRQisJQhq7PS9_ybXDN7ExbsKfXx9gU";
 
 const supabaseClient =
   typeof supabase !== "undefined"
@@ -207,7 +243,7 @@ async function signup(event) {
 }
 
 /*********************************************************
- * GOOGLE LOGIN (LOGIN PAGE — BLOCK NEW USERS)
+ * GOOGLE LOGIN
  *********************************************************/
 async function googleLogin() {
   if (!supabaseClient) return;
@@ -221,7 +257,7 @@ async function googleLogin() {
 }
 
 /*********************************************************
- * GOOGLE SIGNUP (SIGNUP PAGE — CREATE ONLY)
+ * GOOGLE SIGNUP
  *********************************************************/
 async function googleSignup() {
   if (!supabaseClient) return;
@@ -235,7 +271,7 @@ async function googleSignup() {
 }
 
 /*********************************************************
- * GOOGLE RETURN HANDLER (LOGIN / SIGNUP LOGIC)
+ * GOOGLE RETURN HANDLER
  *********************************************************/
 document.addEventListener("DOMContentLoaded", async () => {
   if (!supabaseClient) return;
@@ -253,7 +289,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     .eq("id", user.id)
     .single();
 
-  /* SIGNUP PAGE */
   if (isSignup) {
     if (!profile) {
       await supabaseClient.from("profiles").insert({
@@ -267,14 +302,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  /* LOGIN PAGE */
   if (isLogin) {
     if (!profile) {
       await supabaseClient.auth.signOut();
-      showAuthMessage(
-        "Account not found. Please sign up first.",
-        "error"
-      );
+      showAuthMessage("Account not found. Please sign up first.", "error");
       return;
     }
 
@@ -317,19 +348,16 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("theme", next);
   });
 });
+
 async function logout() {
   if (!supabaseClient) return;
 
   const { error } = await supabaseClient.auth.signOut();
-
   if (error) {
     alert("Logout failed. Try again.");
     return;
   }
 
-  // Optional: clear local storage (theme, UI prefs stay if you want)
   localStorage.removeItem("supabase.auth.token");
-
-  // Redirect to login
   window.location.href = "login.html";
 }
