@@ -886,7 +886,6 @@ body[data-theme="light"] strong {
   .ai-control select,
   .ai-control input {
     height: 32px;
-    padding: 0 10px;
     font-size: 0.75rem;
   }
 
@@ -1117,3 +1116,4 @@ body[data-theme="light"] .model-dropdown {
 body[data-theme="light"] .model-dropdown div:hover {
   background: #f3f4f6;
 }
+
